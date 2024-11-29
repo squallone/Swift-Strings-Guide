@@ -91,6 +91,47 @@ mutableString += " Programming"
 print(mutableString) // Output: Swift Programming
 ```
 
+### Drop & Remove
+
+#### **`dropFirst` and `dropLast`**
+- Create a new `Substring` by removing the first or last character(s) from the string.  
+- These methods do not modify the original string. Instead, they return a `Substring`.
+
+```swift
+var name = "Tom Dick Harry"
+
+print(name.dropFirst())      // "om Dick Harry" (removes the first character)
+print(name.dropLast())       // "Tom Dick Harr" (removes the last character)
+print(name.dropFirst(3))     // " Dick Harry" (removes the first 3 characters)
+print(name.dropLast(5))      // "Tom Dick " (removes the last 5 characters)
+
+// Original string remains unchanged
+print(name)                  // "Tom Dick Harry"
+```
+
+#### **`removeFirst` and `removeLast`**
+- Remove the first or last character(s) directly from the original string.  
+- These methods modify the original string in place.
+
+```swift
+var name = "Tom Dick Harry"
+
+// Remove a single character
+name.removeFirst()           // Removes "T"
+print(name)                  // "om Dick Harry"
+
+// Remove the last character
+name.removeLast()            // Removes "y"
+print(name)                  // "om Dick Harr"
+
+// Remove a specific number of characters
+name.removeFirst(3)          // Removes "om "
+print(name)                  // "Dick Harr"
+
+name.removeLast(5)           // Removes " Harr"
+print(name)                  // "Dick"
+```
+
 ---
 
 ## 5. String Searching
