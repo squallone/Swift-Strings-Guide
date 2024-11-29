@@ -3,34 +3,33 @@
 This guide covers various APIs of `String` in Swift, along with examples and expected outputs. Each API is categorized for clarity. 
 
 ## Table of Contents
-1. [Introduction to Strings in Swift](#introduction-to-strings-in-swift)
-2. [Basic String Initialization](#basic-string-initialization)
-3. [String Properties](#string-properties)
-4. [String Manipulation](#string-manipulation)
+1. [Introduction to Strings in Swift](#1-introduction-to-strings-in-swift)
+2. [Basic String Initialization](#2-basic-string-initialization)
+3. [String Properties](#3-string-properties)
+4. [String Manipulation](#4-string-manipulation)
     - [Concatenation](#concatenation)
     - [Interpolation](#interpolation)
     - [Modification](#modification)
-5. [String Searching](#string-searching)
+5. [String Searching](#5-string-searching)
     - [Finding Substrings](#finding-substrings)
     - [Contains](#contains)
     - [Prefix and Suffix](#prefix-and-suffix)
-6. [String Splitting and Joining](#string-splitting-and-joining)
+6. [String Splitting and Joining](#6-string-splitting-and-joining)
     - [Splitting Strings](#splitting-strings)
     - [Joining Strings](#joining-strings)
-7. [String Iteration](#string-iteration)
-8. [String Comparison](#string-comparison)
+7. [String Iteration](#7-string-iteration)
+8. [String Comparison](#8-string-comparison)
     - [Equality and Comparison](#equality-and-comparison)
     - [Case Insensitive Comparison](#case-insensitive-comparison)
-9. [String Encoding and Decoding](#string-encoding-and-decoding)
-10. [String Transformations](#string-transformations)
+9. [String Encoding and Decoding](#9-string-encoding-and-decoding)
+10. [String Transformations](#10-string-transformations)
     - [Uppercase and Lowercase](#uppercase-and-lowercase)
     - [Trimming Whitespaces](#trimming-whitespaces)
-11. [Substring Handling](#substring-handling)
-12. [Advanced String Operations](#advanced-string-operations)
+11. [Substring Handling](#11-substring-handling)
+12. [Advanced String Operations](#12-advanced-string-operations)
     - [Regular Expressions](#regular-expressions)
     - [Unicode and Character Sets](#unicode-and-character-sets)
-13. [String Performance Tips](#string-performance-tips)
-14. [Conclusion](#conclusion)
+13. [String Performance Tips](#13-string-performance-tips)
 
 ---
 
@@ -198,6 +197,22 @@ let start = text.startIndex
 let end = text.index(text.startIndex, offsetBy: 5)
 let substring = text[start..<end]
 print(substring) // Output: Hello
+```
+
+### **String vs Substring**
+
+| Feature            | String                     | Substring                      |
+|--------------------|----------------------------|---------------------------------|
+| **Ownership**      | Owns its memory           | Shares memory with the original string |
+| **Performance**    | Better for long-term storage and manipulation | More efficient for temporary operations |
+| **Use Case**       | General-purpose text storage | Temporary slices of strings   |
+| **Conversion**     | Not needed                | Must convert to `String` for independent use |
+| **Memory**         | Allocates new memory     | Avoids memory allocation by referencing original `String` |
+
+```swift
+let fullString: String = "Hello, Swift"
+let substring: Substring = fullString.prefix(5) // "Hello"
+let newString: String = String(substring) // Now independent
 ```
 
 ---
