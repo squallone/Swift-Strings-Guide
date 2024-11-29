@@ -1,361 +1,226 @@
-# Strings in Swift
+<img src="https://github.com/user-attachments/assets/91d03879-0917-4c5c-943c-2d9d102afd41" width=80%>
 
-In Swift, strings are represented by the `String` type, which offers a wide variety of APIs to manipulate and query string values. These APIs cover everything from simple string operations to advanced Unicode handling. Below is a detailed overview of the available APIs for strings in Swift, along with examples and expected outputs.
+This guide covers various APIs of `String` in Swift, along with examples and expected outputs. Each API is categorized for clarity. 
 
-# Swift String API Index
-
-1. **[Basic String Initialization](#1-basic-string-initialization)**
-   - `String()`
-   - `String(repeating:count:)`
-
-2. **[String Concatenation](#2-string-concatenation)**
-   - `+` (String Addition)
-   - `+=` (Append Assignment)
-
-3. **[String Length](#3-string-length)**
-   - `count`
-
-4. **[String Comparison](#4-string-comparison)**
-   - `==` (Equality Operator)
-   - `!=` (Inequality Operator)
-   - `compare(_:)`
-
-5. **[String Substring](#5-string-substring)**
-   - `prefix(_:)` and `suffix(_:)`
-   - `subscript(range:)`
-
-6. **[String Case Conversion](#6-string-case-conversion)**
-   - `lowercased()` and `uppercased()`
-   - `capitalized`
-
-7. **[String Trimming](#7-string-trimming)**
-   - `trimmingCharacters(in:)`
-
-8. **[String Search](#8-string-search)**
-   - `contains(_:)`
-   - `range(of:)`
-   - `firstIndex(of:)` and `lastIndex(of:)`
-
-9. **[String Replacement](#9-string-replacement)**
-   - `replacingOccurrences(of:with:)`
-   - `replacingCharacters(in:with:)`
-
-10. **[String Encoding and Decoding](#10-string-encoding-and-decoding)**
-    - `data(using:)`
-    - `String(data:encoding:)`
-
-11. **[String Unicode Handling](#11-string-unicode-handling)**
-    - `unicodeScalars`
-    - `characters`
-
-12. **[String Split](#12-string-split)**
-    - `split(separator:)`
-
-13. **[String Validation](#13-string-validation)**
-    - `isEmpty`
-    - `hasPrefix(_:)` and `hasSuffix(_:)`
+## Table of Contents
+1. [Introduction to Strings in Swift](#introduction-to-strings-in-swift)
+2. [Basic String Initialization](#basic-string-initialization)
+3. [String Properties](#string-properties)
+4. [String Manipulation](#string-manipulation)
+    - [Concatenation](#concatenation)
+    - [Interpolation](#interpolation)
+    - [Modification](#modification)
+5. [String Searching](#string-searching)
+    - [Finding Substrings](#finding-substrings)
+    - [Contains](#contains)
+    - [Prefix and Suffix](#prefix-and-suffix)
+6. [String Splitting and Joining](#string-splitting-and-joining)
+    - [Splitting Strings](#splitting-strings)
+    - [Joining Strings](#joining-strings)
+7. [String Iteration](#string-iteration)
+8. [String Comparison](#string-comparison)
+    - [Equality and Comparison](#equality-and-comparison)
+    - [Case Insensitive Comparison](#case-insensitive-comparison)
+9. [String Encoding and Decoding](#string-encoding-and-decoding)
+10. [String Transformations](#string-transformations)
+    - [Uppercase and Lowercase](#uppercase-and-lowercase)
+    - [Trimming Whitespaces](#trimming-whitespaces)
+11. [Substring Handling](#substring-handling)
+12. [Advanced String Operations](#advanced-string-operations)
+    - [Regular Expressions](#regular-expressions)
+    - [Unicode and Character Sets](#unicode-and-character-sets)
+13. [String Performance Tips](#string-performance-tips)
+14. [Conclusion](#conclusion)
 
 ---
 
-## 1. Basic String Initialization
-
-### `String()`
-
-```swift
-let emptyString = String()
-print(emptyString)  // Output: ""
-
-
-### Basic String Initialization
-
-#### `String` Initialization
-- **`String()`**: Initializes an empty string.
-- **`String(repeating:count:)`**: Initializes a string with a repeated character or substring.
+## 1. Introduction to Strings in Swift
+A `String` in Swift represents a series of characters in a specific order. Swift strings are Unicode-compliant, ensuring support for a wide range of characters and languages.
 
 ```swift
-let emptyString = String()
-print(emptyString)  // Output: ""
-
-let repeatedString = String(repeating: "A", count: 5)
-print(repeatedString)  // Output: "AAAAA"
-```
----
-
-### **String Concatenation**
-
-#### `+` (String Addition)
-- **`+`**: Concatenates two strings.
-
-```swift
-let first = "Hello"
-let second = "World"
-let greeting = first + " " + second
-print(greeting)  // Output: "Hello World"
-```
-
-#### `+=` (Append Assignment)
-- **`+=`**: Appends a string to an existing string.
-
-```swift
-var message = "Hello"
-message += " Swift"
-print(message)  // Output: "Hello Swift"
+let greeting = "Hello, World!"
+print(greeting) // Output: Hello, World!
 ```
 
 ---
 
-### **String Length**
-
-#### `count`
-- **`count`**: Returns the number of characters in the string.
-
-```swift
-let phrase = "Hello, World!"
-print(phrase.count)  // Output: 13
-```
-
----
-
-### **String Comparison**
-
-#### `==` (Equality Operator)
-- **`==`**: Checks if two strings are equal.
-
-```swift
-let str1 = "apple"
-let str2 = "apple"
-let str3 = "orange"
-print(str1 == str2)  // Output: true
-print(str1 == str3)  // Output: false
-```
-
-#### `!=` (Inequality Operator)
-- **`!=`**: Checks if two strings are not equal.
-
-```swift
-print(str1 != str3)  // Output: true
-```
-
-#### `compare(_:)`
-- **`compare(_:)`**: Compares two strings lexicographically.
-
-```swift
-let result = str1.compare(str2)
-switch result {
-case .orderedAscending:
-    print("\(str1) is less than \(str2)")
-case .orderedDescending:
-    print("\(str1) is greater than \(str2)")
-case .orderedSame:
-    print("\(str1) is equal to \(str2)")
-}
-// Output: "apple is equal to apple"
-```
-
----
-
-### **String Substring**
-
-#### `prefix(_:)` and `suffix(_:)`
-- **`prefix(_:)`**: Returns the initial part of the string up to the given number of characters.
-- **`suffix(_:)`**: Returns the final part of the string starting from the given number of characters.
-
-```swift
-let text = "Hello, World!"
-print(text.prefix(5))  // Output: "Hello"
-print(text.suffix(6))  // Output: "World!"
-```
-
-#### `subscript` for Range Access
-- **`subscript(range:)`**: Extracts a substring from a string using a range.
-
-```swift
-let substring = text[text.index(text.startIndex, offsetBy: 0)..<text.index(text.startIndex, offsetBy: 5)]
-print(substring)  // Output: "Hello"
-```
-
----
-
-### **String Case Conversion**
-
-#### `lowercased()` and `uppercased()`
-- **`lowercased()`**: Converts the string to lowercase.
-- **`uppercased()`**: Converts the string to uppercase.
-
-```swift
-let mixedCase = "HeLLo WoRLd"
-print(mixedCase.lowercased())  // Output: "hello world"
-print(mixedCase.uppercased())  // Output: "HELLO WORLD"
-```
-
-#### `capitalized`
-- **`capitalized`**: Capitalizes the first letter of each word.
-
-```swift
-let title = "the swift programming language"
-print(title.capitalized)  // Output: "The Swift Programming Language"
-```
-
----
-
-### **String Trimming**
-
-#### `trimmingCharacters(in:)`
-- **`trimmingCharacters(in:)`**: Removes characters from the start and end of the string based on a given character set.
-
-```swift
-let paddedString = "  Hello, World!  "
-print(paddedString.trimmingCharacters(in: .whitespaces))  // Output: "Hello, World!"
-```
-
----
-
-### **String Search**
-
-#### `contains(_:)`
-- **`contains(_:)`**: Checks if a substring exists within the string.
-
-```swift
-let sentence = "The quick brown fox jumps over the lazy dog"
-print(sentence.contains("quick"))  // Output: true
-print(sentence.contains("cat"))    // Output: false
-```
-
-#### `range(of:)`
-- **`range(of:)`**: Returns the range of the first occurrence of a substring.
-
-```swift
-let searchString = "apple pie"
-if let range = searchString.range(of: "pie") {
-    print("Found at index: \(searchString.distance(from: searchString.startIndex, to: range.lowerBound))")
-    // Output: "Found at index: 6"
-}
-```
-
-#### `firstIndex(of:)` and `lastIndex(of:)`
-- **`firstIndex(of:)`**: Finds the first occurrence of a character.
-- **`lastIndex(of:)`**: Finds the last occurrence of a character.
-
-```swift
-let word = "banana"
-print(word.firstIndex(of: "a"))  // Output: Optional(3)
-print(word.lastIndex(of: "a"))   // Output: Optional(5)
-```
-
----
-
-### **String Replacement**
-
-#### `replacingOccurrences(of:with:)`
-- **`replacingOccurrences(of:with:)`**: Replaces occurrences of a substring with another string.
-
-```swift
-let message = "Hello, World!"
-let updatedMessage = message.replacingOccurrences(of: "World", with: "Swift")
-print(updatedMessage)  // Output: "Hello, Swift!"
-```
-
-#### `replacingCharacters(in:with:)`
-- **`replacingCharacters(in:with:)`**: Replaces a substring in the specified range with a new string.
-
-```swift
-let replaceString = "Hello, World!"
-var mutableString = replaceString
-mutableString.replaceSubrange(mutableString.range(of: "World")!, with: "Swift")
-print(mutableString)  // Output: "Hello, Swift!"
-```
-
----
-
-### **String Encoding and Decoding**
-
-#### `data(using:)`
-- **`data(using:)`**: Converts a string to `Data` using the specified encoding.
-
-```swift
-let text = "Hello, Swift!"
-if let data = text.data(using: .utf8) {
-    print(data)  // Output: 11 bytes of data representation
-}
-```
-
-#### `String(data:encoding:)`
-- **`init(data:encoding:)`**: Converts `Data` back into a string.
-
-```swift
-let data = "Hello, Swift!".data(using: .utf8)!
-let decodedString = String(data: data, encoding: .utf8)!
-print(decodedString)  // Output: "Hello, Swift!"
-```
-
----
-
-### **String Unicode Handling**
-
-#### `unicodeScalars`
-- **`unicodeScalars`**: Returns the Unicode scalar values of the string.
-
-```swift
-let hello = "Hello"
-for scalar in hello.unicodeScalars {
-    print(scalar)
-}
-// Output: U+0048 (H)
-//         U+0065 (e)
-//         U+006C (l)
-//         U+006C (l)
-//         U+006F (o)
-```
-
-#### `characters`
-- **`characters`**: Returns the string's characters as a sequence.
-
-```swift
-let word = "Swift"
-for character in word {
-    print(character)
-}
-// Output: 
-// S
-// w
-// i
-// f
-// t
-```
-
----
-
-### **String Split**
-
-#### `split(separator:)`
-- **`split(separator:)`**: Splits a string into an array of substrings based on a separator.
-
-```swift
-let sentence = "apple,banana,orange"
-let fruits = sentence.split(separator: ",")
-print(fruits)  // Output: ["apple", "banana", "orange"]
-```
-
----
-
-### **String Validation**
-
-#### `isEmpty`
-- **`isEmpty`**: Checks if the string is empty.
-
+## 2. Basic String Initialization
+### Example
 ```swift
 let emptyString = ""
-let nonEmptyString = "Hello"
+let predefinedString = "Swift"
 print(emptyString.isEmpty)  // Output: true
-print(nonEmptyString.isEmpty)  // Output: false
+print(predefinedString)     // Output: Swift
 ```
 
-#### `hasPrefix(_:)` and `hasSuffix(_:)`
-- **`hasPrefix(_:)`**: Checks if the string starts with the given prefix.
-- **`hasSuffix(_:)`**: Checks if the string ends with the given suffix.
+---
 
+## 3. String Properties
+### Example
 ```swift
-let url = "https://www.example.com"
-print(url.hasPrefix("https"))  // Output: true
-print(url.hasSuffix(".com"))   // Output: true
+let sample = "Hello, Swift!"
+
+print(sample.count)          // Output: 13
+print(sample.isEmpty)        // Output: false
+print(sample.first)          // Output: Optional("H")
+print(sample.last)           // Output: Optional("!")
 ```
+
+---
+
+## 4. String Manipulation
+
+### Concatenation
+```swift
+let part1 = "Hello"
+let part2 = "World"
+let full = part1 + ", " + part2 + "!"
+print(full) // Output: Hello, World!
+```
+
+### Interpolation
+```swift
+let name = "John"
+let greeting = "Hello, \(name)!"
+print(greeting) // Output: Hello, John!
+```
+
+### Modification
+```swift
+var mutableString = "Swift"
+mutableString += " Programming"
+print(mutableString) // Output: Swift Programming
+```
+
+---
+
+## 5. String Searching
+
+### Finding Substrings
+```swift
+let text = "Hello, Swift!"
+if let range = text.range(of: "Swift") {
+    print("Found at range: \(range)")
+}
+// Output: Found at range: Range
+```
+
+### Contains
+```swift
+let result = text.contains("Swift")
+print(result) // Output: true
+```
+
+### Prefix and Suffix
+```swift
+let isPrefix = text.hasPrefix("Hello")
+let isSuffix = text.hasSuffix("!")
+print(isPrefix) // Output: true
+print(isSuffix) // Output: true
+```
+
+---
+
+## 6. String Splitting and Joining
+
+### Splitting Strings
+```swift
+let sentence = "Swift is fun"
+let words = sentence.split(separator: " ")
+print(words) // Output: ["Swift", "is", "fun"]
+```
+
+### Joining Strings
+```swift
+let array = ["Swift", "is", "fun"]
+let joined = array.joined(separator: " ")
+print(joined) // Output: Swift is fun
+```
+
+---
+
+## 7. String Iteration
+```swift
+for character in "Swift" {
+    print(character)
+}
+// Output: S w i f t
+```
+
+---
+
+## 8. String Comparison
+
+### Equality and Comparison
+```swift
+let string1 = "Swift"
+let string2 = "Swift"
+print(string1 == string2) // Output: true
+```
+
+### Case Insensitive Comparison
+```swift
+let equal = string1.caseInsensitiveCompare("swift") == .orderedSame
+print(equal) // Output: true
+```
+
+---
+
+## 9. String Encoding and Decoding
+```swift
+let utf8Data = "Hello".data(using: .utf8)!
+print(utf8Data) // Output: UTF8 data
+```
+
+---
+
+## 10. String Transformations
+
+### Uppercase and Lowercase
+```swift
+let text = "Swift"
+print(text.uppercased()) // Output: SWIFT
+print(text.lowercased()) // Output: swift
+```
+
+### Trimming Whitespaces
+```swift
+let spaced = "  Hello  "
+print(spaced.trimmingCharacters(in: .whitespaces)) // Output: Hello
+```
+
+---
+
+## 11. Substring Handling
+```swift
+let text = "Hello, Swift!"
+let start = text.startIndex
+let end = text.index(text.startIndex, offsetBy: 5)
+let substring = text[start..<end]
+print(substring) // Output: Hello
+```
+
+---
+
+## 12. Advanced String Operations
+
+### Regular Expressions
+```swift
+import Foundation
+
+let regex = try! NSRegularExpression(pattern: "[a-zA-Z]+")
+let matches = regex.matches(in: "Swift 2024", range: NSRange("Swift 2024".startIndex..., in: "Swift 2024"))
+print(matches.count) // Output: 1
+```
+
+### Unicode and Character Sets
+```swift
+let unicode = "Swift 🚀"
+print(unicode.unicodeScalars) // Output: Unicode scalars of "Swift 🚀"
+```
+
+---
+
+## 13. String Performance Tips
+- Use `Substring` when working with slices for better performance.
+- Avoid repeated string concatenation; use `StringBuilder`-like methods (e.g., `append`).
