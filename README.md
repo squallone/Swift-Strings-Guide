@@ -41,8 +41,6 @@ let greeting = "Hello, World!"
 print(greeting) // Output: Hello, World!
 ```
 
----
-
 ## 2. Basic String Initialization
 ### Example
 ```swift
@@ -51,8 +49,6 @@ let predefinedString = "Swift"
 print(emptyString.isEmpty)  // Output: true
 print(predefinedString)     // Output: Swift
 ```
-
----
 
 ## 3. String Properties
 ### Example
@@ -64,8 +60,6 @@ print(sample.isEmpty)        // Output: false
 print(sample.first)          // Output: Optional("H")
 print(sample.last)           // Output: Optional("!")
 ```
-
----
 
 ## 4. String Manipulation
 
@@ -132,8 +126,6 @@ name.removeLast(5)           // Removes " Harr"
 print(name)                  // "Dick"
 ```
 
----
-
 ## 5. String Searching
 
 ### Finding Substrings
@@ -159,8 +151,6 @@ print(isPrefix) // Output: true
 print(isSuffix) // Output: true
 ```
 
----
-
 ## 6. String Splitting and Joining
 
 ### Splitting Strings
@@ -177,8 +167,6 @@ let joined = array.joined(separator: " ")
 print(joined) // Output: Swift is fun
 ```
 
----
-
 ## 7. String Iteration
 ```swift
 for character in "Swift" {
@@ -186,8 +174,6 @@ for character in "Swift" {
 }
 // Output: S w i f t
 ```
-
----
 
 ## 8. String Comparison
 
@@ -204,15 +190,11 @@ let equal = string1.caseInsensitiveCompare("swift") == .orderedSame
 print(equal) // Output: true
 ```
 
----
-
 ## 9. String Encoding and Decoding
 ```swift
 let utf8Data = "Hello".data(using: .utf8)!
 print(utf8Data) // Output: UTF8 data
 ```
-
----
 
 ## 10. String Transformations
 
@@ -228,8 +210,6 @@ print(text.lowercased()) // Output: swift
 let spaced = "  Hello  "
 print(spaced.trimmingCharacters(in: .whitespaces)) // Output: Hello
 ```
-
----
 
 ## 11. Substring Handling
 ```swift
@@ -256,8 +236,6 @@ let substring: Substring = fullString.prefix(5) // "Hello"
 let newString: String = String(substring) // Now independent
 ```
 
----
-
 ## 12. Advanced String Operations
 
 ### Regular Expressions
@@ -274,8 +252,6 @@ print(matches.count) // Output: 1
 let unicode = "Swift 🚀"
 print(unicode.unicodeScalars) // Output: Unicode scalars of "Swift 🚀"
 ```
-
----
 
 ## 13. String Performance Tips
 - Use `Substring` when working with slices for better performance.
