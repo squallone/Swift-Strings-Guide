@@ -2,6 +2,70 @@
 
 In Swift, strings are represented by the `String` type, which offers a wide variety of APIs to manipulate and query string values. These APIs cover everything from simple string operations to advanced Unicode handling. Below is a detailed overview of the available APIs for strings in Swift, along with examples and expected outputs.
 
+# Swift String API Index
+
+1. **[Basic String Initialization](#1-basic-string-initialization)**
+   - `String()`
+   - `String(repeating:count:)`
+
+2. **[String Concatenation](#2-string-concatenation)**
+   - `+` (String Addition)
+   - `+=` (Append Assignment)
+
+3. **[String Length](#3-string-length)**
+   - `count`
+
+4. **[String Comparison](#4-string-comparison)**
+   - `==` (Equality Operator)
+   - `!=` (Inequality Operator)
+   - `compare(_:)`
+
+5. **[String Substring](#5-string-substring)**
+   - `prefix(_:)` and `suffix(_:)`
+   - `subscript(range:)`
+
+6. **[String Case Conversion](#6-string-case-conversion)**
+   - `lowercased()` and `uppercased()`
+   - `capitalized`
+
+7. **[String Trimming](#7-string-trimming)**
+   - `trimmingCharacters(in:)`
+
+8. **[String Search](#8-string-search)**
+   - `contains(_:)`
+   - `range(of:)`
+   - `firstIndex(of:)` and `lastIndex(of:)`
+
+9. **[String Replacement](#9-string-replacement)**
+   - `replacingOccurrences(of:with:)`
+   - `replacingCharacters(in:with:)`
+
+10. **[String Encoding and Decoding](#10-string-encoding-and-decoding)**
+    - `data(using:)`
+    - `String(data:encoding:)`
+
+11. **[String Unicode Handling](#11-string-unicode-handling)**
+    - `unicodeScalars`
+    - `characters`
+
+12. **[String Split](#12-string-split)**
+    - `split(separator:)`
+
+13. **[String Validation](#13-string-validation)**
+    - `isEmpty`
+    - `hasPrefix(_:)` and `hasSuffix(_:)`
+
+---
+
+## 1. Basic String Initialization
+
+### `String()`
+
+```swift
+let emptyString = String()
+print(emptyString)  // Output: ""
+
+
 ### Basic String Initialization
 
 #### `String` Initialization
